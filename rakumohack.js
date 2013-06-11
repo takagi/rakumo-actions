@@ -3,6 +3,8 @@
  *
  */
 
+// Command object
+
 function makeCommand ( text, selector ) {
   return { text: text, selector: selector };
 }
@@ -15,14 +17,12 @@ function commandSelector ( command ) {
   return command[ "selector" ];
 }
 
-function createDivCommands ( cls, refNode, pos ) {
+
+// Commands
+
+function createDivForCommands ( cls, refNode, pos ) {
   var actual_cls = "event_dialog_title " + cls;
   return dojo.create( "DIV", { class: actual_cls }, refNode, pos );
-}
-
-function doesDivCommandsExist ( cls ) {
-  var actual_cls = "." + cls
-  return dojo.query( actual_cls )[0] != undefined;
 }
 
 function insertCommand ( text, selector, divCommands ) {
@@ -34,8 +34,13 @@ function insertCommand ( text, selector, divCommands ) {
   dojo.create( "SPAN", { innerHTML: "&emsp;" }, divCommands, "last" );
 }
 
+function doCommandsExist ( cls ) {
+  var actual_cls = "." + cls
+  return dojo.query( actual_cls )[0] != undefined;
+}
+
 function insertCommands ( cls, refNode, pos, commands ) {
-  var divCommands = createDivCommands( cls, refNode, pos );
+  var divCommands = createDivForCommands( cls, refNode, pos );
   if ( ! divCommands ) return;
   
   dojo.forEach( commands, function ( command ) {
@@ -43,6 +48,26 @@ function insertCommands ( cls, refNode, pos, commands ) {
     var selector = commandSelector( command );
     insertCommand( text, selector, divCommands );
   } );
+}
+
+
+// Dialog operations
+
+var INVALID_DIALOG  = -1;
+var REGISTER_DIALOG = 0;
+var EDIT_DIALOG     = 1;
+var DETAIL_DIALOG   = 2;
+
+function doCommandsExistInDetailDialog () {
+  return doCommandsExist( "rakumo_hack_detail" );
+}
+
+function doCommandsExistInRegisterDialog () {
+  return doCommandsExist( "rakumo_hack_register" );
+}
+
+function doCommandsExistInEditDialog () {
+  return doCommandsExist( "rakumo_hack_edit" );
 }
 
 function getDivInEventDialog( cls ) {
@@ -108,13 +133,6 @@ function insertCommandsInEditDialog () {
   insertCommands( "rakumo_hack_edit", divNotification, "after", commands );
 }
 
-var INVALID_DIALOG  = -1;
-var REGISTER_DIALOG = 0;
-var EDIT_DIALOG     = 1;
-var DETAIL_DIALOG   = 2;
-
-var INTERVAL = 500;
-
 function isDialogVisible () {
   if ( dojo.hasClass( dojo.query("#eventPaneView")[0], "dijitVisible" ) )
     return true;
@@ -134,6 +152,11 @@ function getDisplayedDialog () {
   return INVALID_DIALOG;  // can not be reached
 }
 
+
+// Observer
+
+var INTERVAL = 500;
+
 function observe () {
   if ( ! isDialogVisible() ) {
     setTimeout( observe, INTERVAL );
@@ -142,15 +165,15 @@ function observe () {
   
   switch ( getDisplayedDialog() ) {
   case REGISTER_DIALOG:
-    if ( ! doesDivCommandsExist( "rakumo_hack_register" ) )
+    if ( ! doCommandsExistInRegisterDialog() )
       insertCommandsInRegisterDialog();
     break;
   case EDIT_DIALOG:
-    if ( ! doesDivCommandsExist( "rakumo_hack_edit" ) )
+    if ( ! doCommandsExistInEditDialog() )
       insertCommandsInEditDialog();
     break;
   case DETAIL_DIALOG:
-    if ( ! doesDivCommandsExist( "rakumo_hack_detail" ) )
+    if ( ! doCommandsExistInDetailDialog() )
       insertCommandsInDetailDialog();
     break;
   }
