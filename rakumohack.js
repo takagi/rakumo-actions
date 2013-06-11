@@ -61,7 +61,7 @@ function insertCommandsInDetailDialog () {
   var commands = [ makeCommand( "閉じる", "#editPaneCloseBtn" ),
                    makeCommand( "編集する", "#dijit_form_Button_4_label" ),
                    makeCommand( "削除する", "#dijit_form_Button_3_label" ),
-                   makeCommand( "コピー", "#dijit_form_Button_5_label")
+                   makeCommand( "コピー", "#dijit_form_Button_5_label" )
                    ];
   
   var divTitle = getDivTitle();
