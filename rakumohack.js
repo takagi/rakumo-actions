@@ -24,7 +24,7 @@ function insertCommand ( text, selector, divCommands ) {
   var aCommand = dojo.create( "A", { href: "javascript:void(0);", innerHTML: text }, pCommand, "first" );
   dojo.connect( aCommand, "onclick", function() {
     dojo.query( selector )[0].click();
-  });
+  } );
   dojo.create( "SPAN", { innerHTML: "&emsp;" }, divCommands, "last" );
 }
 
@@ -59,53 +59,53 @@ function getDivNotification () {
 
 function insertCommandsInDetailDialog () {
   var commands = [ makeCommand( "閉じる", "#editPaneCloseBtn" ),
-		   makeCommand( "編集する", "#dijit_form_Button_4_label" ),
-		   makeCommand( "削除する", "#dijit_form_Button_3_label" ),
-		   makeCommand( "コピー", "#dijit_form_Button_5_label")
-		   ];
+                   makeCommand( "編集する", "#dijit_form_Button_4_label" ),
+                   makeCommand( "削除する", "#dijit_form_Button_3_label" ),
+                   makeCommand( "コピー", "#dijit_form_Button_5_label")
+                   ];
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;  
   insertCommands( "event_dialog_title rakumo_hack_detail",
-		  divTitle, "before", commands );
+                  divTitle, "before", commands );
   
   var divContent = getDivContent();
   if ( ! divContent ) return;
   insertCommands( "event_dialog_title rakumo_hack_detail",
-		  divContent, "after", commands );
+                  divContent, "after", commands );
 }
 
 function insertCommandsInRegisterDialog () {
   var commands = [ makeCommand( "閉じる", "#editPaneCloseBtn" ),
-		   makeCommand( "登録する", "#dialogNewCloseButton_label" )
-		   ];
+                   makeCommand( "登録する", "#dialogNewCloseButton_label" )
+                   ];
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;
   insertCommands( "event_dialog_title rakumo_hack_register",
-		  divTitle, "before", commands );
+                  divTitle, "before", commands );
   
   var divNotification = getDivNotification();
   if ( ! divNotification ) return;
   insertCommands( "event_dialog_title rakumo_hack_register",
-		  divNotification, "after", commands );
+                  divNotification, "after", commands );
 }
 
 function insertCommandsInEditDialog () {
   var commands = [ makeCommand( "閉じる", "#editPaneCloseBtn" ),
-		   makeCommand( "保存する", "#dialogCloseButton_label" ),
-		   makeCommand( "削除する", "#dialogDeleteButton_label" )
+                   makeCommand( "保存する", "#dialogCloseButton_label" ),
+                   makeCommand( "削除する", "#dialogDeleteButton_label" )
                    ];
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;
   insertCommands( "event_dialog_title rakumo_hack_edit",
-		  divTitle, "before", commands );
+                  divTitle, "before", commands );
   
   var divNotification = getDivNotification();
   if ( ! divNotification ) return;
   insertCommands( "event_dialog_title rakumo_hack_edit",
-		  divNotification, "after", commands );
+                  divNotification, "after", commands );
 }
 
 var INVALID_DIALOG  = -1;
