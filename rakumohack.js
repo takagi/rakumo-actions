@@ -16,7 +16,13 @@ function commandSelector ( command ) {
 }
 
 function createDivCommands ( cls, refNode, pos ) {
-  return dojo.create( "DIV", { class: cls }, refNode, pos );
+  var actual_cls = "event_dialog_title " + cls;
+  return dojo.create( "DIV", { class: actual_cls }, refNode, pos );
+}
+
+function doesDivCommandsExist ( cls ) {
+  var actual_cls = "." + cls
+  return dojo.query( actual_cls )[0] != undefined;
 }
 
 function insertCommand ( text, selector, divCommands ) {
@@ -66,13 +72,11 @@ function insertCommandsInDetailDialog () {
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;  
-  insertCommands( "event_dialog_title rakumo_hack_detail",
-                  divTitle, "before", commands );
+  insertCommands( "rakumo_hack_detail", divTitle, "before", commands );
   
   var divContent = getDivContent();
   if ( ! divContent ) return;
-  insertCommands( "event_dialog_title rakumo_hack_detail",
-                  divContent, "after", commands );
+  insertCommands( "rakumo_hack_detail", divContent, "after", commands );
 }
 
 function insertCommandsInRegisterDialog () {
@@ -82,13 +86,11 @@ function insertCommandsInRegisterDialog () {
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;
-  insertCommands( "event_dialog_title rakumo_hack_register",
-                  divTitle, "before", commands );
+  insertCommands( "rakumo_hack_register", divTitle, "before", commands );
   
   var divNotification = getDivNotification();
   if ( ! divNotification ) return;
-  insertCommands( "event_dialog_title rakumo_hack_register",
-                  divNotification, "after", commands );
+  insertCommands( "rakumo_hack_register", divNotification, "after", commands );
 }
 
 function insertCommandsInEditDialog () {
@@ -99,13 +101,11 @@ function insertCommandsInEditDialog () {
   
   var divTitle = getDivTitle();
   if ( ! divTitle ) return;
-  insertCommands( "event_dialog_title rakumo_hack_edit",
-                  divTitle, "before", commands );
+  insertCommands( "rakumo_hack_edit", divTitle, "before", commands );
   
   var divNotification = getDivNotification();
   if ( ! divNotification ) return;
-  insertCommands( "event_dialog_title rakumo_hack_edit",
-                  divNotification, "after", commands );
+  insertCommands( "rakumo_hack_edit", divNotification, "after", commands );
 }
 
 var INVALID_DIALOG  = -1;
@@ -134,10 +134,6 @@ function getDisplayedDialog () {
   return INVALID_DIALOG;  // can not be reached
 }
 
-function doesDivCommandsExist ( cls ) {
-  return dojo.query( cls )[0] != undefined;
-}
-
 function observe () {
   if ( ! isDialogVisible() ) {
     setTimeout( observe, INTERVAL );
@@ -146,15 +142,15 @@ function observe () {
   
   switch ( getDisplayedDialog() ) {
   case REGISTER_DIALOG:
-    if ( ! doesDivCommandsExist( ".rakumo_hack_register" ) )
+    if ( ! doesDivCommandsExist( "rakumo_hack_register" ) )
       insertCommandsInRegisterDialog();
     break;
   case EDIT_DIALOG:
-    if ( ! doesDivCommandsExist( ".rakumo_hack_edit" ) )
+    if ( ! doesDivCommandsExist( "rakumo_hack_edit" ) )
       insertCommandsInEditDialog();
     break;
   case DETAIL_DIALOG:
-    if ( ! doesDivCommandsExist( ".rakumo_hack_detail" ) )
+    if ( ! doesDivCommandsExist( "rakumo_hack_detail" ) )
       insertCommandsInDetailDialog();
     break;
   }
