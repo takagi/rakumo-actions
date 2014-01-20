@@ -84,10 +84,6 @@ function getDivContent () {
   return getDivInEventDialog( ".event_dialog_content" );
 }
 
-function getDivNotification () {
-  return getDivInEventDialog( ".event_dialog_notification" );
-}
-
 function insertCommandsInDetailDialog () {
   var commands = [ makeCommand( "閉じる", "#editPaneCloseBtn" ),
                    makeCommand( "編集する", "#dijit_form_Button_4_label" ),
@@ -113,9 +109,9 @@ function insertCommandsInRegisterDialog () {
   if ( ! divTitle ) return;
   insertCommands( "rakumo_hack_register", divTitle, "before", commands );
   
-  var divNotification = getDivNotification();
-  if ( ! divNotification ) return;
-  insertCommands( "rakumo_hack_register", divNotification, "after", commands );
+  var divContent = getDivContent();
+  if ( ! divContent ) return;
+  insertCommands( "rakumo_hack_register", divContent, "after", commands );
 }
 
 function insertCommandsInEditDialog () {
@@ -128,9 +124,9 @@ function insertCommandsInEditDialog () {
   if ( ! divTitle ) return;
   insertCommands( "rakumo_hack_edit", divTitle, "before", commands );
   
-  var divNotification = getDivNotification();
-  if ( ! divNotification ) return;
-  insertCommands( "rakumo_hack_edit", divNotification, "after", commands );
+  var divContent = getDivContent();
+  if ( ! divContent ) return;
+  insertCommands( "rakumo_hack_edit", divContent, "after", commands );
 }
 
 function isDialogVisible () {
