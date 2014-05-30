@@ -1,11 +1,11 @@
 {
-  "name"            : "rakumo hack",
+  "name"            : "rakumo-actions",
   "description"     : "make it easy to manage events on rakumo",
   "version"         : "1.0.0",
   "content_scripts" : [
     {
       "matches": ["https://a-rakumo.appspot.com/calendar"],
-      "js"     : ["dojo.js", "rakumohack.js"]
+      "js"     : ["dojo.js", "rakumo-actions.js"]
     }
   ],
   "manifest_version": 2

@@ -1,4 +1,4 @@
-rakumohack
+rakumo-actions
 ==========
 
-Rakumohack is a chrome extension to inject action buttons in event dialogs to make it easy to use.
+Rakumo-actions is a chrome extension to inject action buttons in event dialogs to make it easy to use.
