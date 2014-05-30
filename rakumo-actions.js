@@ -20,7 +20,6 @@ function commandSelector ( command ) {
 
 // Commands
 
-
 function createDivCommands( cls, refNode, pos ) {
   var clsActual = "event_dialog_title " + cls;
   return dojo.create( "DIV", { class: clsActual }, refNode, pos );
