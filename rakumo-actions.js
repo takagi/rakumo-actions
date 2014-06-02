@@ -163,15 +163,15 @@ function observe () {
   
   switch ( getDisplayedDialog() ) {
   case REGISTER_DIALOG:
-    if ( ! doCommandsExistInRegisterDialog() )
+    if ( ! commandsExistInRegisterDialog() )
       insertCommandsInRegisterDialog();
     break;
   case EDIT_DIALOG:
-    if ( ! doCommandsExistInEditDialog() )
+    if ( ! commandsExistInEditDialog() )
       insertCommandsInEditDialog();
     break;
   case DETAIL_DIALOG:
-    if ( ! doCommandsExistInDetailDialog() )
+    if ( ! commandsExistInDetailDialog() )
       insertCommandsInDetailDialog();
     break;
   }
